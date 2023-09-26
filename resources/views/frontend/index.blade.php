@@ -1,5 +1,5 @@
 @extends('frontend.layouts.master')
-@section('title','Hagemaru AutoParts')
+@section('title','Eshop.')
 @section('main-content')
 <!-- Slider Area -->
 @if(count($banners)>0)
