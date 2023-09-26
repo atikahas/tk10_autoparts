@@ -53,11 +53,6 @@
 											@endforeach
 										</li>
 										@endif
-                                        {{-- @foreach(Helper::productCategoryList('products') as $cat)
-                                            @if($cat->is_parent==1)
-												<li><a href="{{route('product-cat',$cat->slug)}}">{{$cat->title}}</a></li>
-											@endif
-                                        @endforeach --}}
                                     </ul>
                                 </div>
                                 <!--/ End Single Widget -->
@@ -104,7 +99,7 @@
                                                 @endphp
                                                 <p class="price">
                                                     @if ($product->discount != 0)
-                                                    <del class="text-muted">RM{{number_format($product->price,2)}}</del>
+                                                    <del class="text-muted">RM {{number_format($product->price,2)}}</del>
                                                     @endif 
                                                     RM {{number_format($org,2)}}  
                                                 </p>
@@ -262,11 +257,6 @@
                                             <div class="quickview-ratting-review">
                                                 <div class="quickview-ratting-wrap">
                                                     <div class="quickview-ratting">
-                                                        {{-- <i class="yellow fa fa-star"></i>
-                                                        <i class="yellow fa fa-star"></i>
-                                                        <i class="yellow fa fa-star"></i>
-                                                        <i class="yellow fa fa-star"></i>
-                                                        <i class="fa fa-star"></i> --}}
                                                         @php
                                                             $rate=DB::table('product_reviews')->where('product_id',$product->id)->avg('rate');
                                                             $rate_count=DB::table('product_reviews')->where('product_id',$product->id)->count();
@@ -292,7 +282,14 @@
                                             @php
                                                 $after_discount=($product->price-($product->price*$product->discount)/100);
                                             @endphp
-                                            <h3><small><del class="text-muted">${{number_format($product->price,2)}}</del></small>    ${{number_format($after_discount,2)}}  </h3>
+                                            <h3>
+                                                <small>
+                                                    @if ($product->discount != 0)
+                                                    <del class="text-muted">RM {{number_format($product->price,2)}}</del>
+                                                    @endif 
+                                                </small>    
+                                                RM {{number_format($after_discount,2)}}  
+                                            </h3>
                                             <div class="quickview-peragraph">
                                                 <p>{!! html_entity_decode($product->summary) !!}</p>
                                             </div>
